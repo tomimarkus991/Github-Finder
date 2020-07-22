@@ -9,11 +9,11 @@ const UsersContextProvider = ({ children }) => {
   const [isSearching, setIsSearching] = useState(false);
 
   const [searchValue, setSearchValue] = useState("");
-const [searchedUsers, setSearchedUsers] = useState([]);
+  const [searchedUsers, setSearchedUsers] = useState([]);
 
   const getData = async () => {
     const rndIdSince = Math.floor(Math.random() * 68610000);
-    
+
     setIsLoading(true);
     const res = await axios.get(
       `https://api.github.com/users?since=${rndIdSince}&client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`
@@ -29,15 +29,25 @@ const [searchedUsers, setSearchedUsers] = useState([]);
     );
     setSearchedUsers(res.data.items);
     setSearchValue("");
-  }
-  
+  };
+
   useEffect(() => {
     getData();
     console.log(searchedUsers);
   }, [searchedUsers]);
 
   return (
-    <UsersContext.Provider value={{ users,searchedUsers, isLoading,isSearching, searchValue, setSearchValue, handleSearch }}>
+    <UsersContext.Provider
+      value={{
+        users,
+        searchedUsers,
+        isLoading,
+        isSearching,
+        searchValue,
+        setSearchValue,
+        handleSearch,
+      }}
+    >
       {children}
     </UsersContext.Provider>
   );
