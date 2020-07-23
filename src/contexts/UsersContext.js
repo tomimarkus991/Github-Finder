@@ -13,28 +13,30 @@ const UsersContextProvider = ({ children }) => {
 
   const getData = async () => {
     const rndIdSince = Math.floor(Math.random() * 68610000);
-
+    setIsSearching(false);
     setIsLoading(true);
     const res = await axios.get(
       `https://api.github.com/users?since=${rndIdSince}&client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`
     );
     setUsers(res.data);
     setIsLoading(false);
+    console.log("i have been called");
   };
   const handleSearch = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
     setIsSearching(true);
     const res = await axios.get(
       `https://api.github.com/search/users?q=${searchValue}&client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`
     );
     setSearchedUsers(res.data.items);
     setSearchValue("");
+    setIsLoading(false);
   };
 
   useEffect(() => {
     getData();
-    console.log(searchedUsers);
-  }, [searchedUsers]);
+  }, []);
 
   return (
     <UsersContext.Provider

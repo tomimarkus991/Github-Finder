@@ -7,29 +7,38 @@ const Users = () => {
   const { users, searchedUsers, isLoading, isSearching } = useContext(
     UsersContext
   );
-  const userStyle = {
-    display: "grid",
-    gridTemplateColumns: "repeat(3, 1fr)",
-    gridGap: "1rem",
-  };
 
-  return isSearching ? (
-    <ul style={userStyle}>
-      {searchedUsers.map((user) => {
-        const { id } = user;
-        return <User key={id} user={user} />;
-      })}
-    </ul>
-  ) : isLoading ? (
-    <Spinner />
-  ) : (
-    <ul style={userStyle}>
-      {users.map((user) => {
-        const { id } = user;
-        return <User key={id} user={user} />;
-      })}
-    </ul>
-  );
+  const userStyle = "col-5 col-md-4 my-2";
+
+  if (isLoading === true) {
+    return <Spinner />;
+  } else if (isSearching === true) {
+    return (
+      <ul className="row">
+        {searchedUsers.map((user) => {
+          const { id } = user;
+          return (
+            <div className={userStyle}>
+              <User key={id} user={user} />
+            </div>
+          );
+        })}
+      </ul>
+    );
+  } else if (isLoading === false) {
+    return (
+      <ul className="row">
+        {users.map((user) => {
+          const { id } = user;
+          return (
+            <div className={userStyle}>
+              <User key={id} user={user} />
+            </div>
+          );
+        })}
+      </ul>
+    );
+  }
 };
 
 export default Users;

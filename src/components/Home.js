@@ -7,7 +7,7 @@ const Home = () => {
   return (
     <div className="container">
       <UsersContextProvider>
-        <Search/>
+        <Search />
         <Users />
       </UsersContextProvider>
     </div>

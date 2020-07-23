@@ -9,11 +9,10 @@ const User = ({ user }) => {
       <img
         src={avatar_url}
         alt="profile pic"
-        className="round-img"
-        style={{ width: "60px" }}
+        className="rounded-circle w-50 d-block m-auto py-2"
       />
       <h3>{login}</h3>
-      <a href={html_url} className="btn btn-dark btn-sm my-1">
+      <a href={html_url} className="btn btn-dark">
         More
       </a>
     </li>
