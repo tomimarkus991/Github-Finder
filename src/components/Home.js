@@ -1,16 +1,13 @@
-import React from "react";
-import UsersContextProvider from "../contexts/UsersContext";
-import Users from "./Users";
-import Search from "./Search";
+import React, { Fragment } from "react";
+import Users from "./Users/Users";
+import Search from "./Users/Search";
 
 const Home = () => {
   return (
-    <div className="container">
-      <UsersContextProvider>
-        <Search />
-        <Users />
-      </UsersContextProvider>
-    </div>
+    <Fragment>
+      <Search />
+      <Users />
+    </Fragment>
   );
 };
 
