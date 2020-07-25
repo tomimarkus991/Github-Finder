@@ -10,7 +10,7 @@ const App = () => {
   return (
     <GithubState>
       <BrowserRouter>
-        <div className="App">
+        <div className="App2">
           <Navbar />
           <div className="container">
             <Switch>

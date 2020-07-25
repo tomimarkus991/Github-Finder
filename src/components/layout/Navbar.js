@@ -1,42 +1,32 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
+import { Navbar as Navbar2, Nav } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 const Navbar = ({ title, icon }) => {
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-      <h1 className="navbar-brand text-white">
-        <i className={icon} />
-        <Link className="text-white" to="/">
-          {title}
-        </Link>
-      </h1>
-      <button
-        className="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target="#navbarTextInfo"
-        aria-controls="navbarText"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span className="navbar-toggler-icon"></span>
-      </button>
-      <div className="collapse navbar-collapse" id="navbarTextInfo">
-        <ul className="navbar-nav ml-auto">
-          <li className="nav-item">
-            <Link className="nav-link" to="/">
-              Home
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link className="nav-link" to="/about">
-              About
-            </Link>
-          </li>
-        </ul>
-      </div>
-    </nav>
+    <Navbar2 bg="dark" variant="dark" expand="lg">
+      <Navbar2.Brand href="/">
+        <i className={icon} /> {title}
+      </Navbar2.Brand>
+      <Navbar2.Toggle className="ml-auto" aria-controls="basic-navbar-nav" />
+      <Navbar2.Collapse id="basic-navbar-nav">
+        <Nav className="ml-auto">
+          <ul className="navbar-nav">
+            <li className="nav-item">
+              <Link className="nav-link" to="/">
+                Home
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/about">
+                About
+              </Link>
+            </li>
+          </ul>
+        </Nav>
+      </Navbar2.Collapse>
+    </Navbar2>
   );
 };
 

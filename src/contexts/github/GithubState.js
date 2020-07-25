@@ -23,12 +23,14 @@ const GithubState = ({ children }) => {
 
   const { users, user, repos, loading, searching } = state;
 
+  const secrets = `client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`;
+
   // Search Users
   const searchUsers = async (searchUsername) => {
     setLoading();
     setSearching();
     const res = await axios.get(
-      `https://api.github.com/search/users?q=${searchUsername}&client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`
+      `https://api.github.com/search/users?q=${searchUsername}&${secrets}`
     );
     dispatch({ type: SEARCH_USERS, payload: res.data.items });
   };
@@ -37,7 +39,7 @@ const GithubState = ({ children }) => {
   const getUser = async (username) => {
     setLoading();
     const res = await axios.get(
-      `https://api.github.com/users/${username}?client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`
+      `https://api.github.com/users/${username}?${secrets}`
     );
     dispatch({ type: GET_USER, payload: res.data });
   };
@@ -47,7 +49,7 @@ const GithubState = ({ children }) => {
     const rndIdSince = Math.floor(Math.random() * 68610000);
     setLoading();
     const res = await axios.get(
-      `https://api.github.com/users?since=${rndIdSince}&client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`
+      `https://api.github.com/users?since=${rndIdSince}&${secrets}`
     );
     dispatch({ type: GET_RANDOM_USERS, payload: res.data });
   };
@@ -56,7 +58,7 @@ const GithubState = ({ children }) => {
   const getUserRepos = async (username) => {
     setLoading();
     const res = await axios.get(
-      `https://api.github.com/users/${username}/repos?client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`
+      `https://api.github.com/users/${username}/repos?${secrets}`
     );
     dispatch({ type: GET_REPOS, payload: res.data });
   };
