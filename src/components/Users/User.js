@@ -3,15 +3,23 @@ import GithubContext from "../../contexts/github/githubContext";
 import Spinner from "../layout/Spinner";
 import Repos from "../repos/Repos";
 import { Link } from "react-router-dom";
+import moment from "moment";
 
 const User = ({ match }) => {
-  const { getUser, loading, user, repos, getUserRepos } = useContext(
-    GithubContext
-  );
+  const {
+    getUser,
+    loading,
+    user,
+    repos,
+    stars,
+    getUserRepos,
+    getStars,
+  } = useContext(GithubContext);
 
   useEffect(() => {
     getUser(match.params.login);
     getUserRepos(match.params.login);
+    getStars(match.params.login);
     // eslint-disable-next-line
   }, []);
 
@@ -29,6 +37,7 @@ const User = ({ match }) => {
     public_repos,
     public_gists,
     hireable,
+    created_at,
   } = user;
   if (loading) return <Spinner />;
   return (
@@ -43,6 +52,14 @@ const User = ({ match }) => {
         <i className="fas fa-check text-success" />
       ) : (
         <i className="fas fa-times-circle text-danger" />
+      )}
+      {stars !== 0 && stars ? (
+        <Fragment>
+          <span className="ml-3">{stars}</span>
+          <i className="far fa-star ml-1"></i>
+        </Fragment>
+      ) : (
+        ""
       )}
       <a href={html_url} className="btn btn-dark my-1 float-right">
         <i className="fab fa-github" />
@@ -60,6 +77,7 @@ const User = ({ match }) => {
             />
             <h1 className="my-1">{name}</h1>
             {location && <p>Location: {location}</p>}
+            Account created {moment(new Date(created_at), "YYYYMMDD").fromNow()}
           </div>
           <div className="col-6">
             {bio && (

@@ -5,10 +5,17 @@ import {
   GET_USER,
   GET_REPOS,
   GET_RANDOM_USERS,
+  GET_NUMBER_OF_STARS,
 } from "../types";
 
 export default (state, action) => {
   switch (action.type) {
+    case GET_NUMBER_OF_STARS:
+      return {
+        ...state,
+        stars: action.payload,
+        loading: false,
+      };
     case GET_REPOS:
       return {
         ...state,

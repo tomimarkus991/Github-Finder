@@ -9,6 +9,7 @@ import {
   GET_USER,
   GET_REPOS,
   GET_RANDOM_USERS,
+  GET_NUMBER_OF_STARS,
 } from "../types";
 
 const GithubState = ({ children }) => {
@@ -16,12 +17,13 @@ const GithubState = ({ children }) => {
     users: [],
     user: {},
     repos: [],
+    stars: null,
     loading: false,
     searching: false,
   };
   const [state, dispatch] = useReducer(GithubReducer, initialState);
 
-  const { users, user, repos, loading, searching } = state;
+  const { users, user, repos, stars, loading, searching } = state;
 
   const secrets = `client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`;
 
@@ -62,6 +64,14 @@ const GithubState = ({ children }) => {
     );
     dispatch({ type: GET_REPOS, payload: res.data });
   };
+  // Get Stars
+  const getStars = async (username) => {
+    setLoading();
+    const res = await axios.get(
+      `https://api.github.com/users/${username}/starred?${secrets}`
+    );
+    dispatch({ type: GET_NUMBER_OF_STARS, payload: res.data.length });
+  };
 
   // Set Loading
   const setLoading = () => dispatch({ type: SET_LOADING });
@@ -80,11 +90,13 @@ const GithubState = ({ children }) => {
         users,
         user,
         repos,
+        stars,
         loading,
         searching,
         searchUsers,
         getUser,
         getUserRepos,
+        getStars,
       }}
     >
       {children}
