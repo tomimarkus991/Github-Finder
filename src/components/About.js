@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 const About = ({ version }) => {
   return (
-    <div>
+    <div className="my-4">
       <h1>About page</h1>
       <p>Version {version}</p>
     </div>
