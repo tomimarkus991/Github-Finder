@@ -4,6 +4,7 @@ import Spinner from "../layout/Spinner";
 import Repos from "../repos/Repos";
 import { Link } from "react-router-dom";
 import moment from "moment";
+import ScrollToTop from "../layout/ScrollToTop";
 
 const User = ({ match }) => {
   const {
@@ -42,6 +43,7 @@ const User = ({ match }) => {
   if (loading) return <Spinner />;
   return (
     <div className="my-4">
+      <ScrollToTop />
       {/* <----- Go Back -----> */}
       <Link to="/" className="btn btn-primary mr-2 mb-2">
         <i className="fas fa-arrow-left" />

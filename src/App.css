@@ -7,7 +7,12 @@ body {
   background-color: #fff;
   color: #333;
 }
+/* bigger than 576px */
 @media (min-width: 576px) {
+  .scrollTop {
+    top: 90%;
+    right: 12%;
+  }
   .followers {
     border-radius: 15px 0 0 15px;
   }
@@ -20,6 +25,11 @@ body {
 }
 
 @media (max-width: 576px) {
+  .scrollTop {
+    right: 4%;
+    top: 90%;
+    color: black;
+  }
   .profile-name {
     font-size: 20px;
   }
@@ -46,5 +56,35 @@ body {
   }
   .parent-social {
     margin: 10px 10px;
+  }
+}
+
+.scrollTop {
+  background-color: black;
+  border-radius: 20px;
+  padding: 20px;
+  color: white;
+  position: fixed;
+  bottom: 20px;
+  align-items: center;
+  height: 20px;
+  z-index: 1000;
+  cursor: pointer;
+  height: 80;
+  animation: fadeIn 0.3s;
+  transition: opacity 0.4s;
+  opacity: 0.9;
+}
+
+.scrollTop:hover {
+  opacity: 1;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0.5;
   }
 }
