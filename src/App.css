@@ -14,9 +14,21 @@ body {
   .public-gists {
     border-radius: 0 15px 15px 0;
   }
+  .profile-pic {
+    width: 50%;
+  }
 }
 
 @media (max-width: 576px) {
+  .profile-name {
+    font-size: 20px;
+  }
+  .user-item {
+    height: 220px;
+  }
+  .profile-pic {
+    width: 60%;
+  }
   .followers {
     font-size: 1.1rem;
     border-top-left-radius: 15px;
