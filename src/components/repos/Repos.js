@@ -1,9 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import PropTypes from "prop-types";
 import RepoItem from "./RepoItem";
+import Spinner from "../layout/Spinner";
+import GithubContext from "../../contexts/github/githubContext";
 
 const Repos = ({ repos }) => {
-  return (
+  const { loadingRepos } = useContext(GithubContext);
+  return loadingRepos ? (
+    <Spinner />
+  ) : (
     <div>
       {repos.length ? <h1 className="text-center">Repos</h1> : ""}
       <ul className="row text-center mr-4">

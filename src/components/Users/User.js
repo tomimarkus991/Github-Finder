@@ -53,6 +53,7 @@ const User = ({ match }) => {
       ) : (
         <i className="fas fa-times-circle text-danger" />
       )}
+      {/* <----- Stars -----> */}
       {stars !== 0 && stars ? (
         <Fragment>
           <span className="ml-3">{stars}</span>
@@ -61,6 +62,7 @@ const User = ({ match }) => {
       ) : (
         ""
       )}
+      {/* <----- Github Link -----> */}
       <a href={html_url} className="btn btn-dark my-1 float-right">
         <i className="fab fa-github" />
       </a>
@@ -75,7 +77,8 @@ const User = ({ match }) => {
               alt=""
               style={{ width: "150px" }}
             />
-            <h1 className="my-1">{name}</h1>
+            {/* <----- Account Created At -----> */}
+            <h1 className="my-2">{name}</h1>
             {location && <p>Location: {location}</p>}
             Account created {moment(new Date(created_at), "YYYYMMDD").fromNow()}
           </div>
@@ -124,7 +127,7 @@ const User = ({ match }) => {
             </div>
           </div>
         </div>
-        <Repos repos={repos} />
+        <Repos repos={repos} loading={loading} />
       </div>
     </div>
   );

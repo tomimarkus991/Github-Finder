@@ -6,10 +6,16 @@ import {
   GET_REPOS,
   GET_RANDOM_USERS,
   GET_NUMBER_OF_STARS,
+  SET_LOADING_REPOS,
 } from "../types";
 
 export default (state, action) => {
   switch (action.type) {
+    case SET_LOADING_REPOS:
+      return {
+        ...state,
+        loadingRepos: true,
+      };
     case GET_NUMBER_OF_STARS:
       return {
         ...state,
@@ -20,7 +26,7 @@ export default (state, action) => {
       return {
         ...state,
         repos: action.payload,
-        loading: false,
+        loadingRepos: false,
       };
     case GET_USER:
       return {

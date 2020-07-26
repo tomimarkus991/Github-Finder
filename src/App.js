@@ -11,7 +11,7 @@ const App = () => {
   return (
     <GithubState>
       <BrowserRouter>
-        <div className="App2">
+        <div>
           <Navbar />
           <div className="container">
             <Switch>

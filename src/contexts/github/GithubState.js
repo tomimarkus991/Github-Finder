@@ -10,6 +10,7 @@ import {
   GET_REPOS,
   GET_RANDOM_USERS,
   GET_NUMBER_OF_STARS,
+  SET_LOADING_REPOS,
 } from "../types";
 
 const GithubState = ({ children }) => {
@@ -19,11 +20,12 @@ const GithubState = ({ children }) => {
     repos: [],
     stars: null,
     loading: false,
+    loadingRepos: false,
     searching: false,
   };
   const [state, dispatch] = useReducer(GithubReducer, initialState);
 
-  const { users, user, repos, stars, loading, searching } = state;
+  const { users, user, repos, stars, loading, searching, loadingRepos } = state;
 
   const secrets = `client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`;
 
@@ -58,7 +60,7 @@ const GithubState = ({ children }) => {
 
   // Get Repos
   const getUserRepos = async (username) => {
-    setLoading();
+    setLoadingRepos();
     const res = await axios.get(
       `https://api.github.com/users/${username}/repos?${secrets}`
     );
@@ -76,6 +78,9 @@ const GithubState = ({ children }) => {
   // Set Loading
   const setLoading = () => dispatch({ type: SET_LOADING });
 
+  // Set Loading Repos
+  const setLoadingRepos = () => dispatch({ type: SET_LOADING_REPOS });
+
   // Set Searching
   const setSearching = () => dispatch({ type: SET_SEARCHING });
 
@@ -92,6 +97,7 @@ const GithubState = ({ children }) => {
         repos,
         stars,
         loading,
+        loadingRepos,
         searching,
         searchUsers,
         getUser,
